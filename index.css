@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'nokiafc22';
+    src: url("./nokia_cellphone/nokiafc22.ttf");
+  }
+
 * {
     /* box-sizing: border-box; */
+    z-index: 5;
 }
 
 :root {
@@ -7,6 +13,8 @@
     --mid-grey: #c0c0c0;
     --std-shadow: 0 10px 20px rgba(0,0,0,0.30), 0 8px 6px rgba(0,0,0,0.22);
     --sml-shadow: 0 5px 10px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22);
+    --black-3210: rgb(15, 15, 15);
+    --green-3210: rgb(159, 185, 65);
 }
 
 html, body {
@@ -14,6 +22,7 @@ html, body {
     padding: 10;
     background-color: var(--light-clr);
     font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'nokiafc22', sans-serif;
     font-size: 16px;
 }
 
@@ -31,18 +40,33 @@ button {
 }
 
 .container {
-    width: 304px;
+    width: 360px;
+    height: 1000px;
     height: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: relative;
+    /* background-color: aquamarine; */
+    position: relative;
+}
+
+.image3210 {
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    display: none;
 }
 
 h1 {
@@ -57,12 +81,13 @@ h2 {
 }
 
 #start {
-    font-size: 1rem;
+    position: absolute;
+    top: 423px;
+    left: 126px;
+    width: 112px;
     height: 50px;
-    width: 75px;
-    /* padding: 4px 8px; */
-    box-shadow: var(--sml-shadow);
-    transition: 200ms ease-in-out;
+    border-radius: 30px;
+    opacity: 0;
 }
 
 #start:hover {
@@ -70,66 +95,84 @@ h2 {
 }
 
 .grid {
-    width: 300px;
-    height: 300px;
-    border: 2px solid black;
+    width: 240px;
+    height: 160px;
+    border: 3px solid rgba(0, 0, 0, 0.5);
     display: flex;
     flex-flow: row wrap;
-    box-shadow: var(--std-shadow);
+
+    position: absolute;
+    top: 209px;
+    left: 59px;
+    transform: scale(0.93);
 }
 
 .grid div {
-    width: 30px;
-    height: 30px;
+    width: 8px;
+    height: 8px;
 }
 
 .square {
-    background-color: var(--light-clr);
-    border: 1px solid var(--mid-grey);
+    /* background-color: var(--light-clr); */
+    /* background-color: var(--green-3210); */
     box-sizing: border-box;
+    opacity: 0.2;
 
 }
 
 .snake {
-    background-color: aquamarine;
+    background-color: var(--black-3210);
+    opacity: 0.7;
 }
 
 .apple {
-    background-color: hotpink;
+    background-color: var(--black-3210);
+    border-radius: 50%;
+    opacity: 0.7;
 }
 
 .kubok {
     display: none;
     width: 60px;
-    height: 60px;
+    height: 40px;
 }
 
-/* .touchButtons {
-    display: flex;
-    margin: 2rem 0;
-    position: relative;
+.touchButtons {
+   
 }
 
 .touchButtons button {
-    width: 150px;
-    height: 50px;
-} */
+    width: 80px;
+    height: 45px;
+    border-radius: 10px;
+    position: absolute;
+    opacity: 0;
+    transform: scale(1.2);
+}
+
+#left {
+    top: 615px;
+    left: 45px;   
+}
+
+#up {
+    top: 555px;
+    left: 140px;
+}
+
+#down {
+    top: 685px;
+    left: 140px;
+}
+
+#right {
+    top: 615px;
+    left: 235px;
+}
 
 
 footer {
-    padding: 2rem;
+    padding: 1rem;
     margin-top: auto;
     text-align: center;
-}
-
-.underConstruction {
-    position: absolute;
-    top: -30px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 2rem;
-    text-align: center;
-    transform: rotate(10deg);
-    background-color: orange;
 }
