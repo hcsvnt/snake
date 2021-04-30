@@ -147,6 +147,7 @@ h2 {
     border-radius: 10px;
     position: absolute;
     opacity: 0;
+    transform: scale(1.2);
 }
 
 #left {

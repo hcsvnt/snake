@@ -143,7 +143,7 @@ function startGame() {
     } else {
         clearInterval(timerId);
         currentSnake.forEach(index => squares[index].classList.remove('snake'));
-        currentSnake = [2, 1, 0];
+        currentSnake = [5, 4, 3, 2, 1, 0];
         currentSnake.forEach(index => squares[index].classList.add('snake'));
         score = 0;
         scoreDisplay.innerText = score;
