@@ -18,7 +18,7 @@ const scoreDisplay = document.querySelector('#score');
 let score = 0;
 // scoreDisplay.innerText = score;
 const squares = []; 
-let currentSnake = [2, 1, 0]; 
+let currentSnake = [5, 4, 3, 2, 1, 0]; 
 //  so currentSnake[0] will be the head
 let direction = 1;
 let width = 30;
