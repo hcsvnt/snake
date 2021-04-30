@@ -11,11 +11,17 @@ const squares = [];
 let currentSnake = [2, 1, 0]; 
 //  so currentSnake[0] will be the head
 let direction = 1;
-let width = 10;
-let height = 10;
+let width = 30;
+let height = 20;
 let appleIndex;
 let intervalTime = 1000;
 let timerId;
+
+// new additions 3210
+const left = document.querySelector("#left");
+const up = document.querySelector("#up");
+const down = document.querySelector("#down");
+const right = document.querySelector("#right");
 
 function createGrid() {    
      for (let i = 0; i < width * height; i++) {
@@ -31,7 +37,7 @@ createGrid();
 currentSnake.forEach(index => squares[index].classList.add('snake'))
 
 function move() {
-    startButton.innerText="Restart"
+    // startButton.innerText="Restart"
     if (
         (currentSnake[0] % 10 === 0 && direction === -1) ||
         (currentSnake[0] + direction < 0 && direction === -10) ||
@@ -40,7 +46,7 @@ function move() {
         squares[currentSnake[0] + direction].classList.contains('snake')
     ) {
         console.log('game over')
-        startButton.innerText="Start"
+        // startButton.innerText="Start"
         return clearInterval(timerId);
     }
 
@@ -69,19 +75,19 @@ function move() {
 // let timerId = setInterval(move, intervalTime);
 
 function control(e) {
-    if (e.key === "ArrowLeft") {
+    if (e.key === "ArrowLeft" || e.target.value === 'left') {
         console.log('left');
         direction = -1;
     }
-    if (e.key === "ArrowUp") {
+    if (e.key === "ArrowUp" || e.target.value === 'up') {
         console.log('up');
         direction = -height;
     }
-    if (e.key === "ArrowRight") {
+    if (e.key === "ArrowRight" || e.target.value === 'right') {
         console.log('right');
         direction = 1;
     }
-    if (e.key === "ArrowDown") {
+    if (e.key === "ArrowDown" || e.target.value === 'down') {
         console.log('down');
         direction = height;
     }
@@ -118,5 +124,16 @@ function startGame() {
 }
 
 startButton.addEventListener('click', startGame);
+
+function test(e) {
+    console.log(e.target.value)
+}
+
+left.addEventListener('click', control);
+up.addEventListener('click', control);
+down.addEventListener('click', control);
+right.addEventListener('click', control);
+
+
 
 // console.log(timerId === true)
