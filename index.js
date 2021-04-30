@@ -1,5 +1,15 @@
 console.log('here!')
 
+const scrollKeys = [' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
+
+function preventScroll(e) {
+    if (scrollKeys.includes(e.key)) {
+        e.preventDefault();
+    }
+}
+
+window.addEventListener('keydown', preventScroll)
+
 const kubok = document.querySelector('.kubok');
 
 const grid = document.querySelector('.grid');
@@ -14,7 +24,7 @@ let direction = 1;
 let width = 30;
 let height = 20;
 let appleIndex;
-let intervalTime = 1000;
+let intervalTime = 350;
 let timerId;
 
 // new additions 3210
@@ -22,6 +32,10 @@ const left = document.querySelector("#left");
 const up = document.querySelector("#up");
 const down = document.querySelector("#down");
 const right = document.querySelector("#right");
+
+const rightWall = [];
+
+
 
 function createGrid() {    
      for (let i = 0; i < width * height; i++) {
@@ -34,15 +48,23 @@ function createGrid() {
 }
 createGrid();
 
+function buildWall() {
+    for (let i = 29; i <= 599; i += 30) {
+        rightWall.push(i);
+    }
+}
+buildWall();
+
 currentSnake.forEach(index => squares[index].classList.add('snake'))
 
 function move() {
     // startButton.innerText="Restart"
     if (
-        (currentSnake[0] % 10 === 0 && direction === -1) ||
-        (currentSnake[0] + direction < 0 && direction === -10) ||
-        (currentSnake[0] % 10 === 9 && direction === 1) ||
-        (currentSnake[0] + direction > 99 && direction === 10) ||
+        (currentSnake[0] % 30 === 0 && direction === -1) ||
+        (currentSnake[0] + direction < 0 && direction === -30) ||
+        // (currentSnake[0] % 30 === 9 && direction === 1) ||
+        (rightWall.includes(currentSnake[0]) && direction === 1 ) ||
+        (currentSnake[0] + direction > 599 && direction === 30) ||
         squares[currentSnake[0] + direction].classList.contains('snake')
     ) {
         console.log('game over')
@@ -63,7 +85,7 @@ function move() {
         squares[tail].classList.add('snake');
         currentSnake.push(tail);
         clearInterval(timerId);
-        intervalTime = intervalTime * 0.9;
+        intervalTime = intervalTime * 0.95;
         timerId = setInterval(move, intervalTime);
     }
 
@@ -75,21 +97,33 @@ function move() {
 // let timerId = setInterval(move, intervalTime);
 
 function control(e) {
-    if (e.key === "ArrowLeft" || e.target.value === 'left') {
+    if  (
+        (e.key === "ArrowLeft" || e.target.value === 'left') && 
+        (direction !== 1)
+        ) {
         console.log('left');
         direction = -1;
     }
-    if (e.key === "ArrowUp" || e.target.value === 'up') {
+    if  (
+        (e.key === "ArrowUp" || e.target.value === 'up') &&
+        (direction !== 30)
+        ) {
         console.log('up');
-        direction = -height;
+        direction = -30;
     }
-    if (e.key === "ArrowRight" || e.target.value === 'right') {
+    if  (
+        (e.key === "ArrowRight" || e.target.value === 'right') &&
+        (direction !== -1)
+        ) {
         console.log('right');
         direction = 1;
     }
-    if (e.key === "ArrowDown" || e.target.value === 'down') {
+    if  (
+        (e.key === "ArrowDown" || e.target.value === 'down') &&
+        (direction !== -30)
+        ) {
         console.log('down');
-        direction = height;
+        direction = 30;
     }
 }
 
@@ -115,7 +149,7 @@ function startGame() {
         scoreDisplay.innerText = score;
         squares[appleIndex].classList.remove('apple');
         generateApples();
-        let intervalTime = 1000;
+        let intervalTime = 350;
         timerId = setInterval(move, intervalTime);
         direction = 1;
         
