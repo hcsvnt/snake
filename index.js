@@ -10,13 +10,11 @@ function preventScroll(e) {
 
 window.addEventListener('keydown', preventScroll)
 
-const kubok = document.querySelector('.kubok');
-
 const grid = document.querySelector('.grid');
 const startButton = document.querySelector('#start');
 const scoreDisplay = document.querySelector('#score');
+const scoreDisplayText = document.querySelector('.score');
 let score = 0;
-// scoreDisplay.innerText = score;
 const squares = []; 
 let currentSnake = [5, 4, 3, 2, 1, 0]; 
 //  so currentSnake[0] will be the head
@@ -34,6 +32,10 @@ const down = document.querySelector("#down");
 const right = document.querySelector("#right");
 
 const rightWall = [];
+
+// new additions feedback
+
+const beep = new Audio('./Nokiabeep.mp3');
 
 
 
@@ -68,7 +70,7 @@ function move() {
         squares[currentSnake[0] + direction].classList.contains('snake')
     ) {
         console.log('game over')
-        // startButton.innerText="Start"
+        scoreDisplayText.style.display="inline-block";
         return clearInterval(timerId);
     }
 
@@ -97,6 +99,9 @@ function move() {
 // let timerId = setInterval(move, intervalTime);
 
 function control(e) {
+    if (window.navigator.vibrate) window.navigator.vibrate(100); // vibration feedback
+    beep.play();
+    
     if  (
         (e.key === "ArrowLeft" || e.target.value === 'left') && 
         (direction !== 1)
@@ -152,6 +157,7 @@ function startGame() {
         let intervalTime = 350;
         timerId = setInterval(move, intervalTime);
         direction = 1;
+        scoreDisplayText.style.display="none";
         
     }
     

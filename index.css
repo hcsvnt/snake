@@ -59,25 +59,6 @@ button {
     left: 0;
     right: 0;
     z-index: 1;
-
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    display: none;
-}
-
-h1 {
-    font-size: 3rem;
-    font-weight: 600;
-    margin: 1rem auto;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-top: 1rem;
 }
 
 #start {
@@ -90,17 +71,12 @@ h2 {
     opacity: 0;
 }
 
-#start:hover {
-    color: hotpink;
-}
-
 .grid {
     width: 240px;
     height: 160px;
     border: 3px solid rgba(0, 0, 0, 0.5);
     display: flex;
     flex-flow: row wrap;
-
     position: absolute;
     top: 209px;
     left: 59px;
@@ -113,11 +89,8 @@ h2 {
 }
 
 .square {
-    /* background-color: var(--light-clr); */
-    /* background-color: var(--green-3210); */
     box-sizing: border-box;
     opacity: 0.2;
-
 }
 
 .snake {
@@ -131,14 +104,16 @@ h2 {
     opacity: 0.7;
 }
 
-.kubok {
+.score {
     display: none;
-    width: 60px;
-    height: 40px;
-}
-
-.touchButtons {
-   
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
+    font-size: 1.5rem;
 }
 
 .touchButtons button {
