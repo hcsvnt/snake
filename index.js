@@ -10,8 +10,6 @@ function preventScroll(e) {
 
 window.addEventListener('keydown', preventScroll)
 
-const kubok = document.querySelector('.kubok');
-
 const grid = document.querySelector('.grid');
 const startButton = document.querySelector('#start');
 const scoreDisplay = document.querySelector('#score');
@@ -101,6 +99,9 @@ function move() {
 // let timerId = setInterval(move, intervalTime);
 
 function control(e) {
+    if (window.navigator.vibrate) window.navigator.vibrate(100); // vibration feedback
+    beep.play();
+    
     if  (
         (e.key === "ArrowLeft" || e.target.value === 'left') && 
         (direction !== 1)
@@ -129,8 +130,6 @@ function control(e) {
         console.log('down');
         direction = 30;
     }
-    if (window.navigator.vibrate) window.navigator.vibrate(100); // vibration feedback
-    beep.play()
 }
 
 document.addEventListener('keydown', control);
